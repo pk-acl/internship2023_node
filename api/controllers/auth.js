@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt')
 const User = require('./../schemas/user')
 const jwt = require('jsonwebtoken');
 const { jsonwebtoken } = require('../../constants/constants');
@@ -14,19 +13,18 @@ const login = function (req, res) {
                 res.status(400).send("User not registered")
             } else {
                 var foundUser = new User(user);
-                foundUser.comparePassword(password).then(result => {
-                    if (!result) {
-                        res.status(400).send("Invalid Creds")
-                    } else {
-                        let payload = {};
-                        payload['id'] = foundUser._id;
-                        payload['role'] = 'admin';
-                        const token = jwt.sign(payload, jsonwebtoken.key, {
-                            expiresIn: 86400
-                        })
-                        res.status(200).json({ token: token })
-                    }
-                })
+                var passwordMatched = foundUser.comparePassword(password);
+                if (!passwordMatched) {
+                    res.status(400).send("Invalid Creds")
+                } else {
+                    let payload = {};
+                    payload['id'] = foundUser._id;
+                    payload['role'] = 'admin';
+                    const token = jwt.sign(payload, jsonwebtoken.key, {
+                        expiresIn: 86400
+                    })
+                    res.status(200).json({ token: token })
+                }
             }
         });
 }
