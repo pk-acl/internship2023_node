@@ -1,4 +1,5 @@
 const User = require('./../schemas/user')
+const jwt = require('jsonwebtoken')
 const { jsonwebtoken } = require('../../constants/constants');
 
 const login = function (req, res) {
@@ -19,9 +20,9 @@ const login = function (req, res) {
                     let payload = {};
                     payload['id'] = foundUser._id;
                     payload['role'] = 'admin';
-                    // const token = jwt.sign(payload, jsonwebtoken.key, {
-                    //     expiresIn: 86400
-                    // })
+                    const token = jwt.sign(payload, jsonwebtoken.key, {
+                        expiresIn: 86400
+                    })
                     res.status(200).json(payload)
                     // res.status(200).json({ token: token })
                 }
