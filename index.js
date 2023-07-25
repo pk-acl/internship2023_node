@@ -19,7 +19,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
-    res.send('Server running successfully...')
+    res.send('Server running successfully on dashboard.render.com')
 })
 
 mongoose.connection.once('open', () => {
