@@ -14,9 +14,12 @@ connectToMongoDb();
 
 const authRouter = require('./api/endpoints/auth');
 const userRouter = require('./api/endpoints/user');
+const downloadRouter = require('./api/endpoints/download');
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
+
+app.use('/download', downloadRouter)
 
 app.get('/', (req, res) => {
     res.send('Server running successfully....')
