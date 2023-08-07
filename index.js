@@ -10,6 +10,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
+const cron = require('node-cron')
+
 connectToMongoDb();
 
 const authRouter = require('./api/endpoints/auth');
@@ -18,6 +20,12 @@ const downloadRouter = require('./api/endpoints/download');
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
+
+cron.schedule("* * * * * *", function () {
+    console.log("---------------------");
+    console.log("running a task every day");
+    // change the status of appointments - inprogress to completed or not attended from scheduled
+});
 
 app.use('/download', downloadRouter)
 
