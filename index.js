@@ -21,11 +21,11 @@ const downloadRouter = require('./api/endpoints/download');
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 
-cron.schedule("* * * * * *", function () {
-    console.log("---------------------");
-    console.log("running a task every day");
-    // change the status of appointments - inprogress to completed or not attended from scheduled
-});
+// cron.schedule("* * * * * *", function () {
+//     console.log("---------------------");
+//     console.log("running a task every day");
+//     // change the status of appointments - inprogress to completed or not attended from scheduled
+// });
 
 app.use('/download', downloadRouter)
 
