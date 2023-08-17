@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const downloadFile = function (req, res, next) {
-    const filePath = path.join(__dirname, '../../assets', 'glass.zip');
+    const filePath = path.join(__dirname, '../../assets', req.query.filename);
   
     // Check if the file exists
     if (fs.existsSync(filePath)) {
