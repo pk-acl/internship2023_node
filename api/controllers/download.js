@@ -6,7 +6,7 @@ const downloadFile = function (req, res, next) {
   
     // Check if the file exists
     if (fs.existsSync(filePath)) {
-      res.setHeader('Content-Disposition', `attachment; filename=glass.zip`);
+      res.setHeader('Content-Disposition', `attachment; filename=${req.query.filename}`);
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);
     } else {
